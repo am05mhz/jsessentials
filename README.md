@@ -55,3 +55,8 @@ someVar = {};
 x_x.isVarTypeOf(someVar, Object); //true
 x_x.isVarTypeOf(someVar, Array); //false
 ```
+
+### Attach events
+```javascript
+x_x.on(window, 'ready', function(){ console.log('doc ready') });
+```
