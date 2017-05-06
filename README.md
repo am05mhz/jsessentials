@@ -3,7 +3,8 @@ small javascript library
 
 ## Usage
 
-### Get json
+### AJAX
+#### Get json
 ```javascript
 x_x.errand({
     url: 'json-url',
@@ -13,7 +14,7 @@ x_x.errand({
 });
 ```
 
-### Post data
+#### Post data
 ```javascript
 x_x.errand({
     url: 'post-url',
@@ -28,7 +29,7 @@ x_x.errand({
 });
 ```
 
-### Custom headers
+#### Custom headers
 ```javascript
 somedata = {postdata: 'postvalue'}
 x_x.errand({
@@ -43,6 +44,11 @@ x_x.errand({
 });
 ```
 
+#### Abort/cancel request
+```javascript
+var req = x_x.errand('http://abc.com');
+req.cancel()
+```
 
 ### Extend object
 ```javascript
