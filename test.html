@@ -2,9 +2,23 @@
 <head>
 <script src="essentials.js"></script>
 <script>
-x_x.on(window, 'ready', function(){console.log('doc ready'); x_x.on('body', 'click', function(){ console.log('body click') })});
+x_x(window).on('ready', function(){
+	console.log('doc ready');
+	x_x('body').on('click', function(){
+		console.log('body click')
+	});
+	x_x('p')
+		.css({backgroundColor: 'yellow'})
+		.on('click', function(ev){
+			ev.stopPropagation();
+			console.log(this.textContent);
+		});
+});
 </script>
 </head>
-<body>
+<body class="test">
+<p>satu</p>
+<p>dua</p>
+<p>tiga</p>
 </body>
 </html>

@@ -64,5 +64,5 @@ x_x.isVarTypeOf(someVar, Array); //false
 
 ### Attach events
 ```javascript
-x_x.on(window, 'ready', function(){ console.log('doc ready') });
+x_x(window).on('ready', function(){ console.log('doc ready') });
 ```
