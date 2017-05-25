@@ -5,6 +5,7 @@
   ],
   "license": "MIT",
   "homepage": "https://github.com/am05mhz/jsessentials",
+  "directory": "public/js/lib",
   "_release": "8906c874c6",
   "_resolution": {
     "type": "branch",
