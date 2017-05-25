@@ -1,19 +1,8 @@
 {
   "name": "jsessentials",
   "authors": [
-	  "Amos Setio <am05mhz@gmail.com>"
+     "Amos Setio <am05mhz@gmail.com>"
   ],
   "license": "MIT",
   "homepage": "https://github.com/am05mhz/jsessentials",
-  "directory": "public/js/lib",
-  "_release": "8906c874c6",
-  "_resolution": {
-    "type": "branch",
-    "branch": "master",
-    "commit": "8906c874c6f964772973ea3a6072565d4a2ace17"
-  },
-  "_source": "https://github.com/am05mhz/jsessentials.git",
-  "_target": "*",
-  "_originalSource": "https://github.com/am05mhz/jsessentials.git",
-  "_direct": true
 }
