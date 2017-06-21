@@ -1,3 +1,91 @@
+(function(){
+	'use strict';
+	
+	var oriMin = Math.min,
+		oriMax = Math.max;
+	
+	Math.min = function(){
+		var arr = [];
+		if (arguments.length > 1){
+			arr = arguments;
+		} else if (arguments.length == 1){
+			if (x_x.isVarTypeOf(arguments[0], Array)){
+				arr = arguments[0];
+			} else {
+				arr.push(arguments[0]);
+			}
+		}
+		return oriMin.apply(Math, arr);
+	}
+	Math.max = function(){
+		var arr = [];
+		if (arguments.length > 1){
+			arr = arguments;
+		} else if (arguments.length == 1){
+			if (x_x.isVarTypeOf(arguments[0], Array)){
+				arr = arguments[0];
+			} else {
+				arr.push(arguments[0]);
+			}
+		}
+		return oriMax.apply(Math, arr);
+	}
+	Math.median = function(){
+		var arr = [];
+		if (arguments.length > 1){
+			arr = arguments;
+		} else if (arguments.length == 1){
+			if (x_x.isVarTypeOf(arguments[0], Array)){
+				if (arguments[0].length > 0){
+					arr = arguments[0];
+				} else {
+					return Infinity;
+				}
+			} else {
+				arr.push(arguments[0]);
+			}
+		} else {
+			return Infinity;
+		}
+		arr.sort();
+		var middle = Math.floor(arr.length / 2);
+		return (arr.length % 2) ? arr[middle] : (arr[middle - 1] + arr[middle]) / 2;
+	}
+	Math.mean = function(){
+		var arr = [];
+		if (arguments.length > 1){
+			arr = arguments;
+		} else if (arguments.length == 1){
+			if (x_x.isVarTypeOf(arguments[0], Array)){
+				if (arguments[0].length > 0){
+					arr = arguments[0];
+				} else {
+					return Infinity;
+				}
+			} else {
+				arr.push(arguments[0]);
+			}
+		} else {
+			return Infinity;
+		}
+		var total = 0;
+		for(var i = 0; i < arr.length; i++){
+			total += arr[i];
+		}
+		return total / arr.length;
+	}
+	Math.avg = Math.mean;
+	Math.range = function(){
+		var arr = [];
+		if (arguments.length == 1){
+			arr = arguments[0];
+		} else {
+			arr = Array.from(arguments);
+		}
+		return Math.max(arr) - Math.min(arr);
+	}
+})();
+
 (function(obj, container){
 	'use strict';
 	
@@ -79,7 +167,7 @@
 		this.xhr = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
 		this.xhr.json = this.json;
 
-		this.cancel = function(callback){
+		this.cancel = function(fn){
 			this.xhr.abort();
 			return this;
 		};
@@ -91,8 +179,8 @@
 
 		for (var name in this.xhr.callbacks){
 			this[name] = function(name){
-				return function(callback){
-					this.xhr.callbacks[name].push(callback);
+				return function(fn){
+					this.xhr.callbacks[name].push(fn);
 					return this;
 				};
 			}(name);
@@ -166,6 +254,9 @@
 	var essentials = function(elm){
 		if (x_x.isVarTypeOf(elm, String)){
 			elm = document.querySelectorAll(elm);
+			if (!elm.forEach){
+				elm = Array.from(elm);
+			}
 		} else if (!x_x.isVarTypeOf(elm, Array)){
 			elm = [elm];
 		}
@@ -213,6 +304,23 @@
 				})
 				return this;
 			},
+			first: function(){
+				return this.nth(1);
+			},
+			last: function(){
+				return this.nth(elm.length);
+			},
+			nth: function(idx){
+				if (elm.length >= idx){
+					elm = [elm[idx - 1]];
+				} else if (elm.length < idx){
+					elm = []
+				}
+				return this;
+			},
+			toDOM: function(){
+				return elm.length == 1 ? elm[0] : elm;
+			}
 		};
 	};
 
@@ -328,6 +436,7 @@
 	                case Uint32Array:
 	                case Float32Array:
 	                case Float64Array:
+	                case NodeList:
 	                    return (_type === Array ? Array : _var.constructor) === _type;
 	                case Object:
 	                default:
