@@ -452,7 +452,3 @@
 		return new errand(args);
 	};
 })('x_x', window)
-
-if (module){
-	module.exports = x_x;
-}
