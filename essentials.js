@@ -1,6 +1,10 @@
 (function(){
 	'use strict';
 	
+	if (!Array.from){
+		Array.from = [].splice.call;
+	}
+	
 	var oriMin = Math.min,
 		oriMax = Math.max;
 	
